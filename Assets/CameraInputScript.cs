@@ -8,10 +8,12 @@ namespace Zikkurat
     public class CameraInputScript : MonoBehaviour
     {
         public PlayerControls controls;
+        Coroutine CoroutineMovement;
 
         private void Awake()
         {
             controls = new PlayerControls();
+            CoroutineMovement = StartCoroutine(Movement());
         }
 
         private void OnEnable()
@@ -23,16 +25,16 @@ namespace Zikkurat
         {
             controls.ActionMap.Disable();
         }
-        private void Update()
-        {
-            Movement();
-        }
 
-        private void Movement()
+        private IEnumerator Movement()
         {
-            var value = controls.ActionMap.CameraMovement.ReadValue<Vector2>();
-            Vector3 direction = new Vector3(value.x,0 , value.y);
-            GetComponent<Rigidbody>().AddForce(direction, ForceMode.Force);
+            while (true)
+            {
+                yield return new WaitForSecondsRealtime(Time.deltaTime);
+                var value = controls.ActionMap.CameraMovement.ReadValue<Vector2>();
+                Vector3 direction = new Vector3(value.x/5, 0, value.y/5);
+                transform.position += direction;
+            }
         }
     }
 }
