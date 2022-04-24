@@ -37,6 +37,15 @@ namespace Zikkurat
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""RotateCamera"",
+                    ""type"": ""Value"",
+                    ""id"": ""2f458f57-1e73-46c8-82a5-e26c2d793412"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -94,6 +103,17 @@ namespace Zikkurat
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8825a31-d42f-4f9d-963a-27347d7e9204"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateCamera"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -103,6 +123,7 @@ namespace Zikkurat
             // ActionMap
             m_ActionMap = asset.FindActionMap("ActionMap", throwIfNotFound: true);
             m_ActionMap_CameraMovement = m_ActionMap.FindAction("CameraMovement", throwIfNotFound: true);
+            m_ActionMap_RotateCamera = m_ActionMap.FindAction("RotateCamera", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -163,11 +184,13 @@ namespace Zikkurat
         private readonly InputActionMap m_ActionMap;
         private IActionMapActions m_ActionMapActionsCallbackInterface;
         private readonly InputAction m_ActionMap_CameraMovement;
+        private readonly InputAction m_ActionMap_RotateCamera;
         public struct ActionMapActions
         {
             private @PlayerControls m_Wrapper;
             public ActionMapActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
             public InputAction @CameraMovement => m_Wrapper.m_ActionMap_CameraMovement;
+            public InputAction @RotateCamera => m_Wrapper.m_ActionMap_RotateCamera;
             public InputActionMap Get() { return m_Wrapper.m_ActionMap; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -180,6 +203,9 @@ namespace Zikkurat
                     @CameraMovement.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnCameraMovement;
                     @CameraMovement.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnCameraMovement;
+                    @RotateCamera.started -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRotateCamera;
+                    @RotateCamera.performed -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRotateCamera;
+                    @RotateCamera.canceled -= m_Wrapper.m_ActionMapActionsCallbackInterface.OnRotateCamera;
                 }
                 m_Wrapper.m_ActionMapActionsCallbackInterface = instance;
                 if (instance != null)
@@ -187,6 +213,9 @@ namespace Zikkurat
                     @CameraMovement.started += instance.OnCameraMovement;
                     @CameraMovement.performed += instance.OnCameraMovement;
                     @CameraMovement.canceled += instance.OnCameraMovement;
+                    @RotateCamera.started += instance.OnRotateCamera;
+                    @RotateCamera.performed += instance.OnRotateCamera;
+                    @RotateCamera.canceled += instance.OnRotateCamera;
                 }
             }
         }
@@ -194,6 +223,7 @@ namespace Zikkurat
         public interface IActionMapActions
         {
             void OnCameraMovement(InputAction.CallbackContext context);
+            void OnRotateCamera(InputAction.CallbackContext context);
         }
     }
 }
