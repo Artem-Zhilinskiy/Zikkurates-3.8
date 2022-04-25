@@ -9,21 +9,25 @@ namespace Zikkurat
     {
         public PlayerControls controls;
         Coroutine CoroutineMovement;
+        private Transform _cameraTransform;
 
         private void Awake()
         {
             controls = new PlayerControls();
             CoroutineMovement = StartCoroutine(Movement());
+            _cameraTransform = this.GetComponentInChildren<Camera>().transform;
         }
 
         private void OnEnable()
         {
             controls.ActionMap.Enable();
+            controls.ActionMap.RotateCamera.performed += RotateCamera();
         }
 
         private void OnDisable()
         {
             controls.ActionMap.Disable();
+            controls.ActionMap.RotateCamera.performed -= RotateCamera();
         }
 
         private IEnumerator Movement()
