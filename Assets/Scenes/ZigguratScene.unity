@@ -975,6 +975,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 305147357}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &327957300
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 327957301}
+  m_Layer: 0
+  m_Name: GreenRespawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &327957301
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327957300}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70, y: 10, z: 4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &352162313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2708,6 +2738,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010354911}
   - component: {fileID: 1010354913}
+  - component: {fileID: 1010354912}
   m_Layer: 0
   m_Name: Gate_Red
   m_TagString: Untagged
@@ -2731,6 +2762,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1010354912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010354910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021ebef4b314e244bbfb5b91325f604e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GreenFighter: {fileID: 7027556362994652721, guid: 878c6bce36f54f840aa68a0113ef92b5,
+    type: 3}
+  RedFighter: {fileID: 327683201130519538, guid: 82093cbdc578ee049beda95c283ecad9,
+    type: 3}
+  BlueFighter: {fileID: 2493364126202478794, guid: d202357f3fd0208488541a43a95f9f06,
+    type: 3}
 --- !u!65 &1010354913
 BoxCollider:
   m_ObjectHideFlags: 0

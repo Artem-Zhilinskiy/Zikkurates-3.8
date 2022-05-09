@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 021ebef4b314e244bbfb5b91325f604e
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - GreenFighter: {fileID: 7027556362994652721, guid: 878c6bce36f54f840aa68a0113ef92b5,
+      type: 3}
+  - RedFighter: {fileID: 327683201130519538, guid: 82093cbdc578ee049beda95c283ecad9,
+      type: 3}
+  - BlueFighter: {fileID: 2493364126202478794, guid: d202357f3fd0208488541a43a95f9f06,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
