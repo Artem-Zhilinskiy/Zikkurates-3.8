@@ -14,6 +14,9 @@ namespace Zikkurat
         [SerializeField, Tooltip("Скорость вращения камеры")]
         private float _speedRotate = 20f;
 
+        [SerializeField, Tooltip("Скорость движения камеры")]
+        private float _speedMove = 20f;
+
         private void Awake()
         {
             controls = new PlayerControls();
@@ -66,8 +69,26 @@ namespace Zikkurat
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 var value = controls.ActionMap.CameraMovement.ReadValue<Vector2>();
-                Vector3 direction = new Vector3(value.x/5, 0, value.y/5);
-                transform.position += direction;
+                //Движение вперёд
+                if (value.y > 0)
+                {
+                    transform.position += transform.forward * Time.deltaTime * _speedMove;
+                }               
+                //Движение назад
+                if (value.y < 0)
+                {
+                    transform.position -= transform.forward * Time.deltaTime * _speedMove;
+                }
+                //Движение вправо
+                if (value.x > 0)
+                {
+                    transform.position += transform.right * Time.deltaTime * _speedMove;
+                }
+                //Движение влево
+                if (value.x < 0)
+                {
+                    transform.position -= transform.right * Time.deltaTime * _speedMove;
+                }
             }
         }
     }
