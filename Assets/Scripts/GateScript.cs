@@ -4,56 +4,48 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 namespace Zikkurat
 {
     public class GateScript : MonoBehaviour
     {
-        public delegate void ClickEventHandler(GateScript component);
+        public delegate void ClickGateDelegate();
         /// <summary>
         /// Событие клика на игровом объекте
         /// </summary>
-        public event ClickEventHandler OnClickEventHandler;
+        public event ClickGateDelegate ClickGateEvent;
 
-        [SerializeField]
-        private InputAction _input;
+        public PlayerControls controls;
 
-        private void Start()
+        private void Awake()
         {
-            _input.Enable();
-            _input.performed += _ => OnClick(true);
-            _input.canceled += _ => OnClick(false);
+            controls = new PlayerControls();
         }
 
-        private void OnClick(bool _isDown)
+        private void OnEnable()
         {
-            if (_isDown)
-            {
-                Debug.Log("_isDown = true");
-                //Пытаюсь получить имя объекта, к которому прикреплён скрипт.
-            }
-            if (_isDown)
-            {
-                Debug.Log("_isDown = false");
-            }
+            controls.ActionMap.Enable();
+            controls.ActionMap.GateClick.performed += OnClick;
         }
-        /*
-        //При нажатии мышкой по объекту, вызывается данный метод
-        public void OnPointerClick(PointerEventData eventData)
+
+        private void OnDisable()
         {
-            OnClickEventHandler?.Invoke(this);
-            Debug.Log("Зарегистрирован клик мышью");
+            controls.ActionMap.GateClick.performed -= OnClick;
+            controls.ActionMap.Disable();
         }
-        public void OnClickMethod(Transform[] _massiveCells)
+
+        private void OnClick(CallbackContext context)
         {
-            OnClickEventHandler += (_chip) =>
-            {
-                /*
-                var _cell = Pair2(GameObject.Find("Main Camera").GetComponent<GameManager>()._blackCells, gameObject.transform);
-                var _cellScript = _cell.GetComponent<CellComponent>();
-                _cellScript.Click(_massiveCells);
-            };
+                if (ClickGateEvent != null)
+                {
+                    ClickGateEvent();
+                }
+                else
+                {
+                    Debug.Log("ClickGateEvent = null");
+                }
         }
-        */
+
     }
 }

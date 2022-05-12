@@ -31,6 +31,15 @@ namespace Zikkurat
         Coroutine _redFighterCreationCoroutine = null;
         Coroutine _blueFighterCreationCoroutine = null;
 
+        //Скрипт ворот
+        [Header("Зелёные ворота"), SerializeField]
+        private Transform GreenGates;
+
+        private void Start()
+        {
+            ClickGateHandler();
+        }
+
         private void Awake()
         {
             _greenFighterCreationCoroutine = StartCoroutine(GreenFighterCreation());
@@ -64,6 +73,16 @@ namespace Zikkurat
                 Instantiate(BlueFighter, BlueRespawnPoint.transform.position, Quaternion.identity);
                 Debug.Log("Синий воин создан");
             }
+        }
+
+        private void ClickGateHandler()
+        {
+            GreenGates.GetComponent<GateScript>().ClickGateEvent += OnClickGateMethod;
+        }
+
+        private void OnClickGateMethod()
+        {
+            Debug.Log("Сработало событие клика на зелёные ворота");
         }
     }
 }

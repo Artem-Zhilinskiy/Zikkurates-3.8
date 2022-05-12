@@ -4272,6 +4272,7 @@ MonoBehaviour:
   GreenRespawnPoint: {fileID: 327957300}
   RedRespawnPoint: {fileID: 730162240}
   BlueRespawnPoint: {fileID: 547617556}
+  GreenGates: {fileID: 2096191718}
 --- !u!4 &1541059219
 Transform:
   m_ObjectHideFlags: 0
@@ -5775,10 +5776,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input:
-    m_Name: 
+    m_Name: Input
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 
+    m_Id: 315f3146-0510-4466-8634-911773109b03
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
