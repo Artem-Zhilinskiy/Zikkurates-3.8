@@ -35,6 +35,9 @@ namespace Zikkurat
         [Header("Зелёные ворота"), SerializeField]
         private Transform GreenGates;
 
+        [Header("Панель параметров зелёных воинов"), SerializeField]
+        private GameObject GreenPanel;
+
         private void Start()
         {
             ClickGateHandler();
@@ -42,9 +45,11 @@ namespace Zikkurat
 
         private void Awake()
         {
+            /*
             _greenFighterCreationCoroutine = StartCoroutine(GreenFighterCreation());
             _redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
             _blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
+            */
         }
 
         private IEnumerator GreenFighterCreation()
@@ -80,9 +85,26 @@ namespace Zikkurat
             GreenGates.GetComponent<GateScript>().ClickGateEvent += OnClickGateMethod;
         }
 
-        private void OnClickGateMethod()
+        private void OnClickGateMethod(string _gateName)
         {
-            Debug.Log("Сработало событие клика на зелёные ворота");
+            /*
+            if (_gateName == "Gate_Green")
+            {
+                Debug.Log("Сработало событие клика на зелёные ворота");
+            }
+            if (_gateName == "Gate_Red")
+            {
+                Debug.Log("Сработало событие клика на красные ворота");
+            }
+            if (_gateName == "Gate_Blue")
+            {
+                Debug.Log("Сработало событие клика на синие ворота");
+            }
+            else
+            {
+                Debug.Log("Произошло что-то непонятное в событии клика на ворота");
+            }
+            */
         }
     }
 }

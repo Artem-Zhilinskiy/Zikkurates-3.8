@@ -8,9 +8,9 @@ using static UnityEngine.InputSystem.InputAction;
 
 namespace Zikkurat
 {
-    public class GateScript : MonoBehaviour
+    public class GateScript : MonoBehaviour, IPointerClickHandler
     {
-        public delegate void ClickGateDelegate();
+        public delegate void ClickGateDelegate(string _gateName);
         /// <summary>
         /// Событие клика на игровом объекте
         /// </summary>
@@ -22,7 +22,9 @@ namespace Zikkurat
         {
             controls = new PlayerControls();
         }
-
+        
+        //Оказывается, это событие клика не по воротам, а вообще.
+        /*
         private void OnEnable()
         {
             controls.ActionMap.Enable();
@@ -39,13 +41,19 @@ namespace Zikkurat
         {
                 if (ClickGateEvent != null)
                 {
-                    ClickGateEvent();
+                    ClickGateEvent(this.gameObject.name);
                 }
                 else
                 {
                     Debug.Log("ClickGateEvent = null");
                 }
         }
+        */
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
+            //Тут этот скрипт будет обращаться к UnitManager методам по выдвижению панели.
+        }
     }
 }
