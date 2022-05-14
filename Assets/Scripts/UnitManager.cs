@@ -37,6 +37,10 @@ namespace Zikkurat
 
         [Header("Панель параметров зелёных воинов"), SerializeField]
         private GameObject GreenPanel;
+        [Header("Панель параметров красных воинов"), SerializeField]
+        private GameObject RedPanel;
+        [Header("Панель параметров синих воинов"), SerializeField]
+        private GameObject BluePanel;
 
         private void Start()
         {
@@ -85,6 +89,12 @@ namespace Zikkurat
             GreenGates.GetComponent<GateScript>().ClickGateEvent += OnClickGateMethod;
         }
 
+        //Методы открытия панелей ворот
+        public void OpenPanel(string _gatename)
+        {
+            PanelDefinition(_gatename).SetActive(true);
+        }
+
         private void OnClickGateMethod(string _gateName)
         {
             /*
@@ -105,6 +115,27 @@ namespace Zikkurat
                 Debug.Log("Произошло что-то непонятное в событии клика на ворота");
             }
             */
+        }
+        //Определение панели по имени ворот
+        private GameObject PanelDefinition(string _gateName)
+        {
+            if (_gateName == "Gate_Green")
+            {
+                return GreenPanel;
+            }
+            if (_gateName == "Gate_Red")
+            {
+                return RedPanel;
+            }
+            if (_gateName == "Gate_Blue")
+            {
+                return BluePanel;
+            }
+            else
+            {
+                return null;
+                Debug.Log("Произошло что-то непонятное в методе PanelDefinition");
+            }
         }
     }
 }

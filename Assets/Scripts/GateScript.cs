@@ -17,6 +17,8 @@ namespace Zikkurat
         public event ClickGateDelegate ClickGateEvent;
 
         public PlayerControls controls;
+        [SerializeField]
+        private GameObject GameManager;
 
         private void Awake()
         {
@@ -54,6 +56,7 @@ namespace Zikkurat
         {
             Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
             //Тут этот скрипт будет обращаться к UnitManager методам по выдвижению панели.
+            GameManager.GetComponent<UnitManager>().OpenPanel(this.gameObject.name);
         }
     }
 }
