@@ -31,6 +31,11 @@ namespace Zikkurat
         Coroutine _redFighterCreationCoroutine = null;
         Coroutine _blueFighterCreationCoroutine = null;
 
+        //Корутина открытия панели
+        Coroutine _openPanel = null;
+        //Корутина закрытия панели
+        Coroutine _closePanel = null ;
+
         //Скрипт ворот
         [Header("Зелёные ворота"), SerializeField]
         private Transform GreenGates;
@@ -90,9 +95,11 @@ namespace Zikkurat
         }
 
         //Методы открытия панелей ворот
-        public void OpenPanel(string _gatename)
+        public void OpenPanel(string _gateName)
         {
-            PanelDefinition(_gatename).SetActive(true);
+            GameObject _panel = PanelDefinition(_gateName);
+            _panel.SetActive(true);
+            _openPanel = StartCoroutine(OpenPanelCoroutine(_panel));
         }
 
         private void OnClickGateMethod(string _gateName)
@@ -133,8 +140,19 @@ namespace Zikkurat
             }
             else
             {
-                return null;
                 Debug.Log("Произошло что-то непонятное в методе PanelDefinition");
+                return null;
+            }
+        }
+
+        //Корутина открытия панели
+        private IEnumerator OpenPanelCoroutine(GameObject _panel)
+        {
+            while(true)
+            {
+                yield return new WaitForSecondsRealtime(Time.deltaTime);
+                //Debug.Log("Корутина открытия панели запущена ");
+                _panel.GetComponent<RectTransform>().transform.position -= new Vector3(0f, 1f);
             }
         }
     }
