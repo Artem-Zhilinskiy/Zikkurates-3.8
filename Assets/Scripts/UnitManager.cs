@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Zikkurat
 {
@@ -34,7 +36,10 @@ namespace Zikkurat
         //Корутина открытия панели
         Coroutine _openPanel = null;
         //Корутина закрытия панели
-        Coroutine _closePanel = null ;
+        Coroutine _closePanel = null;
+
+        //Активная на данный момент панель
+        private GameObject _activePanel;
 
         //Скрипт ворот
         [Header("Зелёные ворота"), SerializeField]
@@ -46,6 +51,9 @@ namespace Zikkurat
         private GameObject RedPanel;
         [Header("Панель параметров синих воинов"), SerializeField]
         private GameObject BluePanel;
+
+        [Header("Кнопки закрытия панелей"), SerializeField]
+        private Button GreenPanelCloseButton;
 
         private void Start()
         {
@@ -63,7 +71,7 @@ namespace Zikkurat
 
         private IEnumerator GreenFighterCreation()
         {
-            while(true)
+            while (true)
             {
                 yield return new WaitForSecondsRealtime(_greenRespawnDelay);
                 Instantiate(GreenFighter, GreenRespawnPoint.transform.position, Quaternion.identity);
@@ -97,9 +105,9 @@ namespace Zikkurat
         //Методы открытия панелей ворот
         public void OpenPanel(string _gateName)
         {
-            GameObject _panel = PanelDefinition(_gateName);
-            _panel.SetActive(true);
-            _openPanel = StartCoroutine(OpenPanelCoroutine(_panel));
+            _activePanel = PanelDefinition(_gateName);
+            //_activePanel.SetActive(true);
+            _openPanel = StartCoroutine(OpenPanelCoroutine(_activePanel));
         }
 
         private void OnClickGateMethod(string _gateName)
@@ -148,12 +156,48 @@ namespace Zikkurat
         //Корутина открытия панели
         private IEnumerator OpenPanelCoroutine(GameObject _panel)
         {
-            while(true)
+            while (_panel.GetComponent<RectTransform>().transform.position.y > 380f)
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
+               //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
                 _panel.GetComponent<RectTransform>().transform.position -= new Vector3(0f, 1f);
             }
+            AllButtonsTuronOn();
+            yield break;
         }
+
+        //Закрытие панели
+        public void ClosePanel()
+        {
+            //_activePanel.SetActive(true);
+            AllButtonsTuronOff();
+            _closePanel = StartCoroutine(ClosePanelCoroutine(_activePanel));
+        }
+
+        private IEnumerator ClosePanelCoroutine(GameObject _panel)
+        {
+            while (_panel.GetComponent<RectTransform>().transform.position.y < 575f)
+            {
+                yield return new WaitForSecondsRealtime(Time.deltaTime);
+                //Debug.Log("Корутина открытия панели запущена ");
+                //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
+                _panel.GetComponent<RectTransform>().transform.position += new Vector3(0f, 1f);
+            }
+            yield break;
+        }
+
+        #region "включение и отключение кнопок"
+        //Методы включения и отключения всех кнопок
+        public void AllButtonsTuronOff()
+        {
+            GreenPanelCloseButton.interactable = false;
+        }
+
+        public void AllButtonsTuronOn()
+        {
+            GreenPanelCloseButton.interactable = true;
+        }
+        #endregion
     }
 }
