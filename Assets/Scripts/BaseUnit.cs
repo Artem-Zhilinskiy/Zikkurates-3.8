@@ -22,7 +22,7 @@ namespace Zikkurat
             GetSteeringBehaviorData = ConfiguraionManager.Self.GetSteeringBehaviourData;
         }
 
-        public Vector3 GetVelocity(IgnoreAxisType ignore = IgnoreAxisType.Y)
+        public Vector3 GetVelocity(IgnoreAxisType ignore = IgnoreAxisType.None)
         {
             return UpdateIgnoreAxis(_rigidBody.velocity, ignore);
         }
