@@ -18,6 +18,10 @@ namespace Zikkurat
             var steering = desired_velocity- unit.GetVelocity(IgnoreAxisType.Y);
             //Учитываем ограничения по силе и массу 
             steering = Vector3.ClampMagnitude(steering, data.MaxVelocity) / unit.Mass;
+
+            var velocity = Vector3.ClampMagnitude(unit.GetVelocity() + steering, data.MaxSpeed);
+
+            unit.SetVelocity(velocity);
         }
 
     }
