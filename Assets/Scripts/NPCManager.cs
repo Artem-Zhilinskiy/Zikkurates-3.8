@@ -22,28 +22,9 @@ namespace Zikkurat
 
         private void Update()
         {
-            foreach (var npc in _npc)
+            foreach (var unit in _npc)
             {
-                switch (npc.State)
-                {
-                    case AIStateType.None:
-                        break;
-                    case AIStateType.Wait:
-                        break;
-                    case AIStateType.Move_Seek:
-                        _steeringBehaviourAssistants.OnSeek(npc);
-                        break;
-                    case AIStateType.Move_Flee:
-                        break;
-                    case AIStateType.Move_Arrival:
-                        break;
-                    case AIStateType.Move_Wander:
-                        break;
-                    case AIStateType.Move_Pursuing:
-                        break;
-                    case AIStateType.Move_Evading:
-                        break;
-                }
+                _steeringBehaviourAssistants.UpdateMoveState(unit);
             }
         }
     }

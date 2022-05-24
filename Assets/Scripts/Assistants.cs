@@ -9,6 +9,30 @@ namespace Zikkurat
 
         public event PainterHandler OnPaint;
 
+        public void UpdateMoveState(NPC unit)
+        {
+            switch (unit.State)
+            {
+                case AIStateType.None:
+                    break;
+                case AIStateType.Wait:
+                    break;
+                case AIStateType.Move_Seek:
+                    OnSeek(unit);
+                    break;
+                case AIStateType.Move_Flee:
+                    break;
+                case AIStateType.Move_Arrival:
+                    break;
+                case AIStateType.Move_Wander:
+                    break;
+                case AIStateType.Move_Pursuing:
+                    break;
+                case AIStateType.Move_Evading:
+                    break;
+            }
+        }
+
         public void OnSeek (NPC unit)
         {
             if (unit.Target == null) return;
@@ -20,8 +44,9 @@ namespace Zikkurat
             steering = Vector3.ClampMagnitude(steering, data.MaxVelocity) / unit.Mass;
 
             var velocity = Vector3.ClampMagnitude(unit.GetVelocity() + steering, data.MaxSpeed);
-
+            OnPaint?.Invoke(unit.transform.position, unit.transform.position + steering);
             unit.SetVelocity(velocity);
+            OnPaint?.Invoke(unit.transform.position, unit.transform.position + velocity);
         }
 
     }
