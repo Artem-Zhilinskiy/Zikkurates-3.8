@@ -18,9 +18,12 @@ namespace Zikkurat
         private void Start()
         {
             _npc = new LinkedList<NPC>(FindObjectsOfType<NPC>());
+
+            var painter = FindObjectOfType<Painter>();
+            _steeringBehaviourAssistants.OnPaint += painter.Paint;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             foreach (var unit in _npc)
             {

@@ -8,6 +8,12 @@ namespace Zikkurat
     [Serializable]
      public struct SteeringBehaviourData
     {
+        [Tooltip("Величина стремления к цели"), SerializeField, Range(0.1f, 100f)]
+        public float MaxVelocity;
+        [Tooltip("Максимальная скорость перемещения"), SerializeField, Range(0.1f, 100f)]
+        public float MaxSpeed;
+        [Tooltip("Расстояние начала прибытия"), SerializeField, Range(0.1f, 100f)]
+        public float ArrivalDistance;
 
     }
 
