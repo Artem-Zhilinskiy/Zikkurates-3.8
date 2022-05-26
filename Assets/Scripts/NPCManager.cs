@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Zikkurat
 {
@@ -18,6 +19,9 @@ namespace Zikkurat
         private void Start()
         {
             _npc = new LinkedList<NPC>(FindObjectsOfType<NPC>());
+
+            var hunter = _npc.FirstOrDefault(t => t.name == "Hunter");
+            hunter.Target = _npc.FirstOrDefault(t => t.name == "Unit");
 
             var painter = FindObjectOfType<Painter>();
             _steeringBehaviourAssistants.OnPaint += painter.Paint;
