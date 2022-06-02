@@ -16,6 +16,8 @@ namespace Zikkurat
 
         public float Mass => _rigidBody.mass;
 
+        public float WanderAngle { get; set; }
+
         protected virtual void Start()
         {
             _rigidBody = GetComponent<RigidBody>();

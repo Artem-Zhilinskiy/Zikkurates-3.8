@@ -78,7 +78,7 @@ namespace Zikkurat
             if (unit.Target == null) return;
             var data = unit.GetSteeringBehaviorData;
             //Сила стремления к цели
-            var desired_velocity = (unit.Target.transform.position - unit.transform.position.normalized * data.MaxVelocity;
+            var desired_velocity = (unit.Target.transform.position - unit.transform.position.normalized * data.MaxVelocity);
             //Квадрат расстояния до цели
             var sqrlength = desired_velocity.sqrMagnitude; 
 
@@ -147,7 +147,13 @@ namespace Zikkurat
         private void OnWander(NPC unit)
         {
             var data = unit.GetSteeringBehaviorData;
-            var center = unit.GetVelocity(IgnoreAxisType.Y).normalized
+            //Вектор стремления персонажа к центру сил блуждания
+            var center = unit.GetVelocity(IgnoreAxisType.Y).normalized;
+
+            var displacement = Vector3.zero;
+            displacement.x = Mathf.Cos(unit.WanderAngle * Mathf.Deg2Rad);
+            displacement.z = Mathf.Sin(unit.WanderAngle * Mathf.Deg2Rad);
+            displacement = displacement.normalized * data.WanderRadius;
         }
 
         private Vector3 CheckMinSpeed(Vector3 velocity)
