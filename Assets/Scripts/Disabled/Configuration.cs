@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Zikkurat
 {
+	/*
 	[CreateAssetMenu(fileName = "New Configuration", menuName = "Configuration")]
 	public class Configuration : ScriptableObject
 	{
@@ -12,4 +13,5 @@ namespace Zikkurat
 
 		public IReadOnlyDictionary<AnimationType, string> GetDictionary => _keys.Clone();
 	}
+	*/
 }

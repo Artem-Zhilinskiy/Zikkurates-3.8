@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Zikkurat
 {
+    /*
     public class Painter : MonoBehaviour
     {
         private Dictionary<string, Dictionary<string, LineRenderer>> _dictionary;
@@ -38,4 +39,5 @@ namespace Zikkurat
             line.SetPositions(new Vector3[] { stert, end });
         }
     }
+    */
 }

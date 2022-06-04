@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace Zikkurat
 {
+    /*
     public class NPCManager : MonoBehaviour
     {
         private SteeringBehaviourAssistants _steeringBehaviourAssistants;
@@ -35,4 +36,5 @@ namespace Zikkurat
             }
         }
     }
+    */
 }

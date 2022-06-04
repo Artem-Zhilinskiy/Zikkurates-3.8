@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Zikkurat
 {
+    /*
     [RequireComponent(typeof(Rigidbody))]
     public abstract class BaseUnit : MonoBehaviour
     {
@@ -43,4 +44,5 @@ namespace Zikkurat
             return velocity;
         }
     }
+    */
 }

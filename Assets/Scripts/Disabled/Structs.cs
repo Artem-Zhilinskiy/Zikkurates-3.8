@@ -5,6 +5,7 @@ using System;
 
 namespace Zikkurat
 {
+    /*
     [Serializable]
      public struct SteeringBehaviourData
     {
@@ -14,6 +15,12 @@ namespace Zikkurat
         public float MaxSpeed;
         [Tooltip("Расстояние начала прибытия"), SerializeField, Range(0.1f, 100f)]
         public float ArrivalDistance;
+        [Tooltip ("Дистанция до центра окружности блуждания"), SerializeField, Range(0.1f, 100)]
+        public float WanderCenterDistance;
+        [Tooltip("Радиус окружности блуждания"), SerializeField, Range(0f, 100f)]
+        public float WanderRadius;
+        [Tooltip("Разброс угла блуждания"), SerializeField, Range(0f, 360f)]
+        public float WanderAngleRange;
 
     }
 
@@ -36,4 +43,5 @@ namespace Zikkurat
         Move_Pursuing=234,
         Move_Evading = 235,
     }
+    */
 }

@@ -62,11 +62,9 @@ namespace Zikkurat
 
         private void Awake()
         {
-            /*
             _greenFighterCreationCoroutine = StartCoroutine(GreenFighterCreation());
-            _redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
-            _blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
-            */
+            //_redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
+            //_blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
         }
 
         private IEnumerator GreenFighterCreation()
@@ -161,7 +159,7 @@ namespace Zikkurat
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
                //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
-                _panel.GetComponent<RectTransform>().transform.position -= new Vector3(0f, 1f);
+                _panel.GetComponent<RectTransform>().transform.position -= new Vector3(0f, 5f);
             }
             AllButtonsTuronOn();
             yield break;
@@ -182,7 +180,7 @@ namespace Zikkurat
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
                 //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
-                _panel.GetComponent<RectTransform>().transform.position += new Vector3(0f, 1f);
+                _panel.GetComponent<RectTransform>().transform.position += new Vector3(0f, 5f);
             }
             yield break;
         }

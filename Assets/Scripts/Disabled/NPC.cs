@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Zikkurat
 {
+    /*
     public class NPC : BaseUnit
     {
         public AIStateType State { get; set; }
@@ -17,4 +18,5 @@ namespace Zikkurat
         }
 
     }
+    */
 }

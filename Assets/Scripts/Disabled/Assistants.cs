@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Zikkurat
-{
+{/*
     public class Assistants : IPainter
     {
 
@@ -154,6 +154,20 @@ namespace Zikkurat
             displacement.x = Mathf.Cos(unit.WanderAngle * Mathf.Deg2Rad);
             displacement.z = Mathf.Sin(unit.WanderAngle * Mathf.Deg2Rad);
             displacement = displacement.normalized * data.WanderRadius;
+
+            unit.WanderAngle += Random.Range(-data.WanderAngleRange, data.WanderAngleRange);
+
+            //Сила стремления к цели
+            var desired_velocity = center + displacement;
+            //Коррекция движения от текущей к желаемой
+            var steering = desired_velocity - unit.GetVelocity(IgnoreAxisType.Y);
+            //Учитываем ограничения по силе и массу 
+            steering = Vector3.ClampMagnitude(steering, data.MaxVelocity) / unit.Mass;
+
+            var velocity = Vector3.ClampMagnitude(unit.GetVelocity() + steering, data.MaxSpeed);
+            OnPaint?.Invoke(unit.transform.position, unit.transform.position + desired_velocity, unit.name, "velocity");
+            unit.SetVelocity(velocity);
+            OnPaint?.Invoke(unit.transform.position, unit.transform.position + velocity, unit.name, "steering");
         }
 
         private Vector3 CheckMinSpeed(Vector3 velocity)
@@ -165,4 +179,5 @@ namespace Zikkurat
             return velocity;
         }
     }
+    */
 }
