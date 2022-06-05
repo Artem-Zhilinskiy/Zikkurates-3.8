@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3288221463307079812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7027556362994652721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46883de79b85d6045919ac176affe22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1089877205091314555
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 7973307358779964746, guid: 1be16647de1030a4c95a6925ba05db92,
         type: 3}
       propertyPath: m_Name
-      value: RPGHeroPolyart Green
+      value: Fighter Green
       objectReference: {fileID: 0}
     - target: {fileID: 7975488677711241080, guid: 1be16647de1030a4c95a6925ba05db92,
         type: 3}
@@ -74,3 +86,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 4ff977f107e2ffb40a708ee6e7549889, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1be16647de1030a4c95a6925ba05db92, type: 3}
+--- !u!1 &7027556362994652721 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7973307358779964746, guid: 1be16647de1030a4c95a6925ba05db92,
+    type: 3}
+  m_PrefabInstance: {fileID: 1089877205091314555}
+  m_PrefabAsset: {fileID: 0}

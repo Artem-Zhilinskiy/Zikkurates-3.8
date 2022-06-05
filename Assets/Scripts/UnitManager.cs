@@ -23,6 +23,9 @@ namespace Zikkurat
         [SerializeField]
         private GameObject BlueRespawnPoint;
 
+        [SerializeField, Header("Центр карты")]
+        public GameObject MapCenter;
+
         //Задержки создания юнитов
         private int _greenRespawnDelay = 4;
         private int _blueRespawnDelay = 5;
@@ -197,5 +200,11 @@ namespace Zikkurat
             GreenPanelCloseButton.interactable = true;
         }
         #endregion
+
+        public void SetVelocity(GameObject _unit)
+        {
+            _unit.transform.LookAt(MapCenter.transform);
+            _unit.GetComponent<Rigidbody>().velocity = Transform Vector3.forward*5f;
+        }
     }
 }
