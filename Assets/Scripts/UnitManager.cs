@@ -201,10 +201,12 @@ namespace Zikkurat
         }
         #endregion
 
+        /*
         public void SetVelocity(GameObject _unit)
         {
             _unit.transform.LookAt(MapCenter.transform);
-            _unit.GetComponent<Rigidbody>().velocity = Transform Vector3.forward*5f;
+            _unit.GetComponent<Rigidbody>().velocity = _unit.transform.forward;
         }
+        */
     }
 }
