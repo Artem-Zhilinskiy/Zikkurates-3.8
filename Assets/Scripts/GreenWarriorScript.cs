@@ -20,6 +20,26 @@ namespace Zikkurat
             */
         }
 
+        /*
+        Arrival(GameObject _target)
+        {
+        //Вычислить distance между this.gameObject и _target
+        //Если _distance <1
+        остановить движение
+        если target == враг
+        ударить();
+        }
+
+        Поиск врага()
+        {
+        }
+
+        Удар()
+        {
+        Вероятность ударов - сильный и слабый + анимация
+        }
+        */
+
         private void Update()
         {
            //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
