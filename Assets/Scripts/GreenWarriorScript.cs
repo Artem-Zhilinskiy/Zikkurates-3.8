@@ -6,13 +6,13 @@ namespace Zikkurat
 {
     public class GreenWarriorScript : MonoBehaviour
     {
+
+        Vector3 _mapCenter = Vector3.zero;
         private GameObject _gameManager; 
         private void Awake()
         {
             //Развернуть бойца в центр карты
-            Vector3 _mapCenter = Vector3.zero;
-            this.gameObject.transform.LookAt(_mapCenter);
-            Arrival();
+
             /*
             _gameManager = GameObject.Find("GameManager");
             _gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
@@ -42,12 +42,24 @@ namespace Zikkurat
 
         private void Update()
         {
-           //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
+            //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
+            Arrival(_mapCenter);
         }
 
         private void Arrival(Vector3 _destination)
         {
-
+            this.gameObject.transform.LookAt(_mapCenter);
+            float _distance = Vector3.Distance(this.transform.position, _destination);
+            if (_distance < 1f)
+            {
+                this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
+                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            }
+            else
+            {
+                this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
+                this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
+            }
         }
     }
 }
