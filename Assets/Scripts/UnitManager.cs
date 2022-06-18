@@ -66,7 +66,7 @@ namespace Zikkurat
         private void Awake()
         {
             _greenFighterCreationCoroutine = StartCoroutine(GreenFighterCreation());
-            //_redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
+            _redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
             //_blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
         }
 

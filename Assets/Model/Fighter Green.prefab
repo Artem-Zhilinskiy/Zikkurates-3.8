@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &3288221463307079812
+--- !u!114 &5803091247592124645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7027556362994652721}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46883de79b85d6045919ac176affe22c, type: 3}
+  m_Script: {fileID: 11500000, guid: 474c4f441aa25274a9b561e13ca029e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7261720881896301282
@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 3529663877565757015}
   - component: {fileID: 256512797246591436}
   - component: {fileID: 6861597358825482447}
+  - component: {fileID: 2432875343965383844}
+  - component: {fileID: 3887020284664522981}
   m_Layer: 0
   m_Name: AlertSphere
   m_TagString: Untagged
@@ -105,6 +107,34 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2432875343965383844
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261720881896301282}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &3887020284664522981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261720881896301282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c7891fe5292e54e9238afe05077699, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1089877205091314555
 PrefabInstance:
   m_ObjectHideFlags: 0

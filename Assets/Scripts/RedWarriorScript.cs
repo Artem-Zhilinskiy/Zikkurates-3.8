@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Zikkurat
 {
-    public class GreenWarriorScript : MonoBehaviour
+    public class RedWarriorScript : MonoBehaviour
     {
 
         Vector3 _mapCenter = Vector3.zero;
-        private GameObject _gameManager;
+        private GameObject _gameManager; 
         private void Awake()
         {
             //Развернуть бойца в центр карты
@@ -44,7 +44,6 @@ namespace Zikkurat
         {
             //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
             Arrival(_mapCenter);
-            Alert();
         }
 
         private void Arrival(Vector3 _destination)
@@ -61,11 +60,6 @@ namespace Zikkurat
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
                 this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
             }
-        }
-
-        private void Alert()
-        {
-            //Здесь надо запустить OnTriggerEnter AlertSphere
         }
     }
 }
