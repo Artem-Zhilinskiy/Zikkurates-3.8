@@ -58,7 +58,7 @@ namespace Zikkurat
             else
             {
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
-                this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
+                this.GetComponent<Rigidbody>().velocity = this.transform.forward*3f;
             }
         }
     }
