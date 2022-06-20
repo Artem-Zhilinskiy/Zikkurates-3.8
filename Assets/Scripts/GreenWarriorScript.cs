@@ -7,47 +7,22 @@ namespace Zikkurat
     public class GreenWarriorScript : MonoBehaviour
     {
 
-        Vector3 _destination = new Vector3(0,2f,0);
+        private Vector3 _destination = new Vector3(0,2f,0);
         private GameObject _gameManager;
-        private GameObject _alertSphere;
-        private GameObject _enemy;
+        private GameObject _alertSphere = null;
+        private GameObject _enemy = null;
 
         private bool _inBattle = false;
         private void Awake()
         {
-            _alertSphere = GameObject.Find("AlertSphere");
-            //Развернуть бойца в центр карты
-
-            /*
-            _gameManager = GameObject.Find("GameManager");
-            _gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
-            this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
-            */
+            //Важно! Вот это ищет первую AlertSphere
+            //_alertSphere = GameObject.Find("AlertSphere");
+            //А вот это ищет дочернюю AlertSphere
+            _alertSphere = this.transform.Find("AlertSphere").gameObject;
         }
-
-        /*
-        Arrival(GameObject _target)
-        {
-        //Вычислить distance между this.gameObject и _target
-        //Если _distance <1
-        остановить движение
-        если target == враг
-        ударить();
-        }
-
-        Поиск врага()
-        {
-        }
-
-        Удар()
-        {
-        Вероятность ударов - сильный и слабый + анимация
-        }
-        */
 
         private void Update()
         {
-            //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
             Arrival(_destination);
             Alert();
         }
@@ -63,11 +38,12 @@ namespace Zikkurat
                 if (_inBattle)
                 {
                     //Анмация удара
-                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("FastAttack");
+                    //this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("FastAttack");
                 }
             }
             else
             {
+                Debug.Log("Двигаюсь к " + _destination);
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
                 this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
             }
@@ -81,12 +57,12 @@ namespace Zikkurat
             {
                 _enemy = _alertSphere.GetComponent<AlertSphereScript>()._enemy;
                 string _name = _enemy.gameObject.name;
-                Debug.Log(_name + " Alert");
                 //2. Проверить, идёт ли бой (boolean) и если нет, то передать gameObject в Attack()
                 if ((_name == "Fighter Blue(Clone)") || (_name == "Fighter Red(Clone)"))
                 {
                     if (!_inBattle)
                     {
+                        //Debug.Log("Начинаю атаку на " + _name + " на " + _enemy.transform.position);
                         Attack(_enemy);
                     }
                 }
@@ -96,7 +72,7 @@ namespace Zikkurat
         private void Attack(GameObject _enemy)
         {
             _inBattle = true;
-            Arrival(_enemy.transform.position);
+            _destination = _enemy.transform.position;
         }
     }
 }

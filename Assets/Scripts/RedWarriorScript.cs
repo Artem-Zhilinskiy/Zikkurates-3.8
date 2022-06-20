@@ -7,7 +7,7 @@ namespace Zikkurat
     public class RedWarriorScript : MonoBehaviour
     {
 
-        Vector3 _mapCenter = Vector3.zero;
+        Vector3 _destination = new Vector3(0, 2f, 5f);
         private GameObject _gameManager; 
         private void Awake()
         {
@@ -43,12 +43,12 @@ namespace Zikkurat
         private void Update()
         {
             //_gameManager.GetComponent<UnitManager>().SetVelocity(this.gameObject);
-            Arrival(_mapCenter);
+            Arrival(_destination);
         }
 
         private void Arrival(Vector3 _destination)
         {
-            this.gameObject.transform.LookAt(_mapCenter);
+            this.gameObject.transform.LookAt(_destination);
             float _distance = Vector3.Distance(this.transform.position, _destination);
             if (_distance < 1f)
             {

@@ -15,7 +15,7 @@ namespace Zikkurat
             if (EnemyCheck(_collider.gameObject.name)) 
             {
                 _enemy = _collider.gameObject;
-                Debug.Log("враг - " + _collider.gameObject.name);
+                //Debug.Log("враг - " + _collider.gameObject.name);
             }
 
 
@@ -24,12 +24,12 @@ namespace Zikkurat
         {
             if (((_name == "Fighter Green(Clone)") | (_name == "Fighter Red(Clone)") | (_name == "Fighter Blue(Clone)")) && (_name != transform.parent.name))
             {
-                Debug.Log("Enemy Check true");
+                //Debug.Log("Enemy Check true");
                 return true;
             }
             else
             {
-                Debug.Log("Enemy Check false");
+                //Debug.Log("Enemy Check false");
                 return false;
             }
         }

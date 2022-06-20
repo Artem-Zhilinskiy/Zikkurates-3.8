@@ -76,7 +76,7 @@ namespace Zikkurat
             {
                 yield return new WaitForSecondsRealtime(_greenRespawnDelay);
                 Instantiate(GreenFighter, GreenRespawnPoint.transform.position, Quaternion.identity);
-                Debug.Log("Зелёный воин создан");
+                //Debug.Log("Зелёный воин создан");
             }
         }
         private IEnumerator RedFighterCreation()
@@ -85,7 +85,7 @@ namespace Zikkurat
             {
                 yield return new WaitForSecondsRealtime(_redRespawnDelay);
                 Instantiate(RedFighter, RedRespawnPoint.transform.position, Quaternion.identity);
-                Debug.Log("Красный воин создан");
+                //Debug.Log("Красный воин создан");
             }
         }
         private IEnumerator BlueFighterCreation()
