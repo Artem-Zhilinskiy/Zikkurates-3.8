@@ -38,7 +38,7 @@ namespace Zikkurat
                 if (_inBattle)
                 {
                     //Анмация удара
-                    //this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("FastAttack");
+                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("FastAttack");
                 }
             }
             else
