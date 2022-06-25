@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Zikkurat
 {
-    public class GreenWarriorScript : MonoBehaviour
+    public class WarriorScript : MonoBehaviour
     {
 
         private Vector3 _destination = new Vector3(0,2f,0);
@@ -38,7 +38,7 @@ namespace Zikkurat
                 if (_inBattle)
                 {
                     //Анмация удара
-                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("FastAttack");
+                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
                 }
             }
             else
@@ -58,7 +58,7 @@ namespace Zikkurat
                 _enemy = _alertSphere.GetComponent<AlertSphereScript>()._enemy;
                 string _name = _enemy.gameObject.name;
                 //2. Проверить, идёт ли бой (boolean) и если нет, то передать gameObject в Attack()
-                if ((_name == "Fighter Blue(Clone)") || (_name == "Fighter Red(Clone)"))
+                if ((_name != this.gameObject.name) && ((_name == "Fighter Blue(Clone)") || (_name == "Fighter Red(Clone)") || (_name == "Fighter Green(Clone)")))
                 {
                     if (!_inBattle)
                     {
@@ -73,6 +73,13 @@ namespace Zikkurat
         {
             _inBattle = true;
             _destination = _enemy.transform.position;
+            //Отнять жизни у врага?
+            _enemy.GetComponent<WarriorScript>().GetWound();
+        }
+
+        public void GetWound()
+        {
+            Debug.Log(this.gameObject.name + " получил рану");
         }
     }
 }
