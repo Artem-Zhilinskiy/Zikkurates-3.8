@@ -27,9 +27,9 @@ namespace Zikkurat
         public GameObject MapCenter;
 
         //Задержки создания юнитов
-        private int _greenRespawnDelay = 4;
-        private int _blueRespawnDelay = 5;
-        private int _redRespawnDelay = 6;
+        private int _greenRespawnDelay = 999;
+        private int _blueRespawnDelay = 999;
+        private int _redRespawnDelay = 999;
 
         //Корутина создания юнитов
         Coroutine _greenFighterCreationCoroutine = null;
@@ -61,6 +61,9 @@ namespace Zikkurat
         private void Start()
         {
             ClickGateHandler();
+            //Отладка один на один
+            Instantiate(RedFighter, RedRespawnPoint.transform.position, Quaternion.identity);
+            Instantiate(GreenFighter, GreenRespawnPoint.transform.position, Quaternion.identity);
         }
 
         private void Awake()

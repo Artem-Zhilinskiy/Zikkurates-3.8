@@ -12,6 +12,8 @@ namespace Zikkurat
         private GameObject _alertSphere = null;
         private GameObject _enemy = null;
 
+        private int _health = 6;
+
         private bool _inBattle = false;
         private void Awake()
         {
@@ -23,12 +25,17 @@ namespace Zikkurat
 
         private void Update()
         {
-            Arrival(_destination);
             Alert();
+            Arrival(_destination);
         }
 
         private void Arrival(Vector3 _destination)
         {
+            //Проверка на смещение врага
+            if (_enemy != null)
+            {
+                _destination = _enemy.transform.position;
+            }
             this.gameObject.transform.LookAt(_destination);
             float _distance = Vector3.Distance(this.transform.position, _destination);
             if (_distance < 2f)
@@ -39,11 +46,13 @@ namespace Zikkurat
                 {
                     //Анмация удара
                     this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
+                    //Отнять жизни у врага?
+                    _enemy.GetComponent<WarriorScript>().WoundFast();
                 }
             }
             else
             {
-                Debug.Log("Двигаюсь к " + _destination);
+                //Debug.Log("Двигаюсь к " + _destination);
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
                 this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
             }
@@ -53,7 +62,7 @@ namespace Zikkurat
         private void Alert()
         {
             //1. Вытащить из дочернего скрипта gameObject вошедшего воина
-            if (_alertSphere.GetComponent<AlertSphereScript>()._enemy != null)
+            if ((_enemy == null) && (_alertSphere.GetComponent<AlertSphereScript>()._enemy != null))
             {
                 _enemy = _alertSphere.GetComponent<AlertSphereScript>()._enemy;
                 string _name = _enemy.gameObject.name;
@@ -73,13 +82,16 @@ namespace Zikkurat
         {
             _inBattle = true;
             _destination = _enemy.transform.position;
-            //Отнять жизни у врага?
-            _enemy.GetComponent<WarriorScript>().GetWound();
         }
 
-        public void GetWound()
+        public void WoundFast()
         {
-            Debug.Log(this.gameObject.name + " получил рану");
+            _health -= 3;
+            Debug.Log("У " + this.gameObject.name + " осталось " + _health + " здоровья");
+            if (_health <=0)
+            {
+                this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
+            }
         }
     }
 }
