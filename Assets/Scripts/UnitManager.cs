@@ -27,9 +27,9 @@ namespace Zikkurat
         public GameObject MapCenter;
 
         //Задержки создания юнитов
-        private int _greenRespawnDelay = 999;
-        private int _blueRespawnDelay = 999;
-        private int _redRespawnDelay = 999;
+        private int _greenRespawnDelay = 4;
+        private int _blueRespawnDelay = 5;
+        private int _redRespawnDelay = 6;
 
         //Корутина создания юнитов
         Coroutine _greenFighterCreationCoroutine = null;
@@ -57,13 +57,20 @@ namespace Zikkurat
 
         [Header("Кнопки закрытия панелей"), SerializeField]
         private Button GreenPanelCloseButton;
+        [SerializeField]
+        private Button RedPanelCloseButton;
+        [SerializeField]
+        private Button BluePanelCloseButton;
+
+        //Открыта ли на данный момент какая-нибудь панель
+        private bool _panelIsOpened = false;
 
         private void Start()
         {
             ClickGateHandler();
             //Отладка один на один
-            Instantiate(RedFighter, RedRespawnPoint.transform.position, Quaternion.identity);
-            Instantiate(GreenFighter, GreenRespawnPoint.transform.position, Quaternion.identity);
+            //Instantiate(RedFighter, RedRespawnPoint.transform.position, Quaternion.identity);
+            //Instantiate(GreenFighter, GreenRespawnPoint.transform.position, Quaternion.identity);
         }
 
         private void Awake()
@@ -109,6 +116,10 @@ namespace Zikkurat
         //Методы открытия панелей ворот
         public void OpenPanel(string _gateName)
         {
+            if (_panelIsOpened)
+            {
+                ClosePanel();
+            }
             _activePanel = PanelDefinition(_gateName);
             //_activePanel.SetActive(true);
             _openPanel = StartCoroutine(OpenPanelCoroutine(_activePanel));
@@ -167,7 +178,8 @@ namespace Zikkurat
                //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
                 _panel.GetComponent<RectTransform>().transform.position -= new Vector3(0f, 5f);
             }
-            AllButtonsTuronOn();
+            AllButtonsTurnOn();
+            _panelIsOpened = true;
             yield break;
         }
 
@@ -175,7 +187,7 @@ namespace Zikkurat
         public void ClosePanel()
         {
             //_activePanel.SetActive(true);
-            AllButtonsTuronOff();
+            AllButtonsTurnOff();
             _closePanel = StartCoroutine(ClosePanelCoroutine(_activePanel));
         }
 
@@ -188,19 +200,24 @@ namespace Zikkurat
                 //Debug.Log(_panel.GetComponent<RectTransform>().transform.position);
                 _panel.GetComponent<RectTransform>().transform.position += new Vector3(0f, 5f);
             }
+            _panelIsOpened = false;
             yield break;
         }
 
         #region "включение и отключение кнопок"
         //Методы включения и отключения всех кнопок
-        public void AllButtonsTuronOff()
+        public void AllButtonsTurnOff()
         {
             GreenPanelCloseButton.interactable = false;
+            RedPanelCloseButton.interactable = false;
+            BluePanelCloseButton.interactable = false;
         }
 
-        public void AllButtonsTuronOn()
+        public void AllButtonsTurnOn()
         {
             GreenPanelCloseButton.interactable = true;
+            RedPanelCloseButton.interactable = true;
+            BluePanelCloseButton.interactable = true;
         }
         #endregion
 

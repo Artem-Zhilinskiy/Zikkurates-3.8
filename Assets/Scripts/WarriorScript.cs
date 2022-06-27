@@ -14,6 +14,9 @@ namespace Zikkurat
 
         private int _health = 6;
 
+        //Корутина удара
+        Coroutine _fastAttack = null;
+
         private bool _inBattle = false;
         private void Awake()
         {
@@ -40,14 +43,18 @@ namespace Zikkurat
             float _distance = Vector3.Distance(this.transform.position, _destination);
             if (_distance < 2f)
             {
-                this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
-                this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                if (_fastAttack == null)
+                {
+                    this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
+                    this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+                }
                 if (_inBattle)
                 {
-                    //Анмация удара
-                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
                     //Отнять жизни у врага?
-                    _enemy.GetComponent<WarriorScript>().WoundFast();
+                    if (_fastAttack == null)
+                    {
+                        _fastAttack = StartCoroutine(FastAttackCoroutine());
+                    }
                 }
             }
             else
@@ -90,7 +97,25 @@ namespace Zikkurat
             Debug.Log("У " + this.gameObject.name + " осталось " + _health + " здоровья");
             if (_health <=0)
             {
+                StopAllCoroutines();
                 this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
+            }
+        }
+
+        private IEnumerator FastAttackCoroutine()
+        {
+            while (_inBattle)
+            {
+                yield return new WaitForSecondsRealtime(1f);
+                //Анмация удара
+                this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
+                _enemy.GetComponent<WarriorScript>().WoundFast();
+                if (_enemy == null)
+                {
+                    this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
+                    _inBattle = false;
+                    yield break;
+                }
             }
         }
     }

@@ -49,7 +49,8 @@ namespace Zikkurat
 		{
 			//В конце анимации смерти особый аргумент и своя логика обработки
 			if (result == "die") Destroy(gameObject);
-			OnEndAnimation.Invoke(null, null);
+			//OnEndAnimation?.Invoke(null, null);
+			OnEndAnimation?.Invoke(null, null);
 		}
 	}
 }
