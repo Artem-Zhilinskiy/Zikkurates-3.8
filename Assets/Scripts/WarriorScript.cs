@@ -12,7 +12,22 @@ namespace Zikkurat
         private GameObject _alertSphere = null;
         private GameObject _enemy = null;
 
-        private int _health = 6;
+        #region "Блок параметров юнита"
+        //Здоровье
+        private int _health;
+        //Скорость перемещения
+        private float _speed;
+        //Урон от слабой атаки
+        private int _fastDamage;
+        //Урон от сильной атаки
+        private int _strongDamage;
+        //Вероятность промаха
+        private float _missProbability;
+        //Вероятность двукратного урона
+        private float _critProbability;
+        //Вероятность сильной атаки
+        private float _strongAttackProbability;
+        #endregion
 
         //Корутина удара
         Coroutine _fastAttack = null;
@@ -24,6 +39,9 @@ namespace Zikkurat
             //_alertSphere = GameObject.Find("AlertSphere");
             //А вот это ищет дочернюю AlertSphere
             _alertSphere = this.transform.Find("AlertSphere").gameObject;
+
+            //Считывание и присвоение параметров из соответствующей панели
+            SettingUnit();
         }
 
         private void Update()
@@ -117,6 +135,12 @@ namespace Zikkurat
                     yield break;
                 }
             }
+        }
+
+        //Считывание из панели и присвоение параметров юниту
+        private void SettingUnit()
+        {
+
         }
     }
 }
