@@ -7,20 +7,20 @@ namespace Zikkurat
     public class WarriorScript : MonoBehaviour
     {
 
-        private Vector3 _destination = new Vector3(0,2f,0);
+        private Vector3 _destination = new Vector3(0, 2f, 0);
         private GameObject _gameManager;
         private GameObject _alertSphere = null;
         private GameObject _enemy = null;
 
         #region "Блок параметров юнита"
         //Здоровье
-        private int _health;
+        private float _health;
         //Скорость перемещения
-        private float _speed;
+        private float _speed = 0f;
         //Урон от слабой атаки
-        private int _fastDamage;
+        private float _fastDamage;
         //Урон от сильной атаки
-        private int _strongDamage;
+        private float _strongDamage;
         //Вероятность промаха
         private float _missProbability;
         //Вероятность двукратного урона
@@ -79,7 +79,7 @@ namespace Zikkurat
             {
                 //Debug.Log("Двигаюсь к " + _destination);
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
-                this.GetComponent<Rigidbody>().velocity = this.transform.forward*5f;
+                this.GetComponent<Rigidbody>().velocity = this.transform.forward * _speed;
             }
         }
 
@@ -111,9 +111,9 @@ namespace Zikkurat
 
         public void WoundFast()
         {
-            _health -= 3;
+            _health -= _fastDamage;
             Debug.Log("У " + this.gameObject.name + " осталось " + _health + " здоровья");
-            if (_health <=0)
+            if (_health <= 0)
             {
                 StopAllCoroutines();
                 this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
@@ -140,7 +140,36 @@ namespace Zikkurat
         //Считывание из панели и присвоение параметров юниту
         private void SettingUnit()
         {
-
+            if (this.gameObject.name == "Fighter Green(Clone)")
+            {
+                _health = StaticParameter._healthGreen;
+                _speed = StaticParameter._speedGreen;
+                _fastDamage = StaticParameter._fastDamageGreen;
+                _strongDamage = StaticParameter._strongDamageGreen;
+                _missProbability = StaticParameter._missProbabilityGreen;
+                _critProbability = StaticParameter._critProbabilityGreen;
+                _strongAttackProbability = StaticParameter._strongAttackProbabilityGreen;
+            }
+            else if(this.gameObject.name == "Fighter Red(Clone)")
+            {
+                _health = StaticParameter._healthRed;
+                _speed = StaticParameter._speedRed;
+                _fastDamage = StaticParameter._fastDamageRed;
+                _strongDamage = StaticParameter._strongDamageRed;
+                _missProbability = StaticParameter._missProbabilityRed;
+                _critProbability = StaticParameter._critProbabilityRed;
+                _strongAttackProbability = StaticParameter._strongAttackProbabilityRed;
+            }
+            else if(this.gameObject.name == "Fighter Blue(Clone)")
+            {
+                _health = StaticParameter._healthBlue;
+                _speed = StaticParameter._speedBlue;
+                _fastDamage = StaticParameter._fastDamageBlue;
+                _strongDamage = StaticParameter._strongDamageBlue;
+                _missProbability = StaticParameter._missProbabilityBlue;
+                _critProbability = StaticParameter._critProbabilityBlue;
+                _strongAttackProbability = StaticParameter._strongAttackProbabilityBlue;
+            }
         }
     }
 }

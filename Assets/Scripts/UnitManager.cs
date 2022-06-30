@@ -104,7 +104,7 @@ namespace Zikkurat
             {
                 yield return new WaitForSecondsRealtime(_blueRespawnDelay);
                 Instantiate(BlueFighter, BlueRespawnPoint.transform.position, Quaternion.identity);
-                Debug.Log("Синий воин создан");
+                //Debug.Log("Синий воин создан");
             }
         }
 
@@ -171,7 +171,7 @@ namespace Zikkurat
         //Корутина открытия панели
         private IEnumerator OpenPanelCoroutine(GameObject _panel)
         {
-            while (_panel.GetComponent<RectTransform>().transform.position.y > 380f)
+            while (_panel.GetComponent<RectTransform>().transform.position.y > 300f)
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
@@ -193,7 +193,7 @@ namespace Zikkurat
 
         private IEnumerator ClosePanelCoroutine(GameObject _panel)
         {
-            while (_panel.GetComponent<RectTransform>().transform.position.y < 575f)
+            while (_panel.GetComponent<RectTransform>().transform.position.y < 650f)
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
