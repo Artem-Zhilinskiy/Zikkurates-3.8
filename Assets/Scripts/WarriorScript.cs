@@ -14,23 +14,25 @@ namespace Zikkurat
 
         #region "Блок параметров юнита"
         //Здоровье
-        private float _health;
+        private float _health = 6f;
         //Скорость перемещения
-        private float _speed = 0f;
+        private float _speed = 3f;
         //Урон от слабой атаки
-        private float _fastDamage;
+        private float _fastDamage = 3f;
         //Урон от сильной атаки
-        private float _strongDamage;
+        private float _strongDamage = 6f;
         //Вероятность промаха
-        private float _missProbability;
+        private float _missProbability = 0f;
         //Вероятность двукратного урона
-        private float _critProbability;
+        private float _critProbability = 0f;
         //Вероятность сильной атаки
-        private float _strongAttackProbability;
+        private float _strongAttackProbability = 0f;
         #endregion
 
         //Корутина удара
         Coroutine _fastAttack = null;
+        //Корутина движения юнита
+        Coroutine _movementUnit = null;
 
         private bool _inBattle = false;
         private void Awake()
@@ -42,12 +44,14 @@ namespace Zikkurat
 
             //Считывание и присвоение параметров из соответствующей панели
             SettingUnit();
+
+            //Корутина движения юнита
+            _movementUnit = StartCoroutine(MovementCoroutine());
         }
 
         private void Update()
         {
-            Alert();
-            Arrival(_destination);
+            Alert(); //Переделать на событие
         }
 
         private void Arrival(Vector3 _destination)
@@ -80,6 +84,7 @@ namespace Zikkurat
                 //Debug.Log("Двигаюсь к " + _destination);
                 this.gameObject.GetComponent<UnitEnvironment>().Moving(1f);
                 this.GetComponent<Rigidbody>().velocity = this.transform.forward * _speed;
+                //Debug.Log(_speed);
             }
         }
 
@@ -111,11 +116,13 @@ namespace Zikkurat
 
         public void WoundFast()
         {
+            Debug.Log(_health + "health");
+            Debug.Log(_fastDamage + "fastDamage");
             _health -= _fastDamage;
             Debug.Log("У " + this.gameObject.name + " осталось " + _health + " здоровья");
             if (_health <= 0)
             {
-                StopAllCoroutines();
+                StopCoroutine(FastAttackCoroutine());
                 this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
             }
         }
@@ -134,6 +141,15 @@ namespace Zikkurat
                     _inBattle = false;
                     yield break;
                 }
+            }
+        }
+
+        private IEnumerator MovementCoroutine()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(Time.deltaTime);
+                Arrival(_destination);
             }
         }
 

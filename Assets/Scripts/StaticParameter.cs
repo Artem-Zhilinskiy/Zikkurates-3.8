@@ -11,29 +11,29 @@ namespace Zikkurat
         //Для зелёных юнитов
         public static float _healthGreen = 6f;
         public static float _speedGreen = 3f;
-        public static float _fastDamageGreen;
-        public static float _strongDamageGreen;
-        public static float _missProbabilityGreen;
-        public static float _critProbabilityGreen;
-        public static float _strongAttackProbabilityGreen;
+        public static float _fastDamageGreen=3f;
+        public static float _strongDamageGreen=6f;
+        public static float _missProbabilityGreen=0f;
+        public static float _critProbabilityGreen=0f;
+        public static float _strongAttackProbabilityGreen=0f;
 
         //Для красных юнитов
         public static float _healthRed = 6f;
         public static float _speedRed = 3f;
-        public static float _fastDamageRed;
-        public static float _strongDamageRed;
-        public static float _missProbabilityRed;
-        public static float _critProbabilityRed;
-        public static float _strongAttackProbabilityRed;
+        public static float _fastDamageRed=3f;
+        public static float _strongDamageRed=6f;
+        public static float _missProbabilityRed=0f;
+        public static float _critProbabilityRed=0f;
+        public static float _strongAttackProbabilityRed=0f;
 
         //Для синих юнитов
-        public static float _healthBlue;
-        public static float _speedBlue;
-        public static float _fastDamageBlue;
-        public static float _strongDamageBlue;
-        public static float _missProbabilityBlue;
-        public static float _critProbabilityBlue;
-        public static float _strongAttackProbabilityBlue;
+        public static float _healthBlue=6f;
+        public static float _speedBlue=3f;
+        public static float _fastDamageBlue=3f;
+        public static float _strongDamageBlue=6f;
+        public static float _missProbabilityBlue=0f;
+        public static float _critProbabilityBlue=0f;
+        public static float _strongAttackProbabilityBlue=0f;
         #endregion
 
         #region "Блок слайдеров"

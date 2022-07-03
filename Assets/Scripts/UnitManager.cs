@@ -171,7 +171,7 @@ namespace Zikkurat
         //Корутина открытия панели
         private IEnumerator OpenPanelCoroutine(GameObject _panel)
         {
-            while (_panel.GetComponent<RectTransform>().transform.position.y > 300f)
+            while (_panel.GetComponent<RectTransform>().transform.position.y > 350f)
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");
@@ -193,7 +193,7 @@ namespace Zikkurat
 
         private IEnumerator ClosePanelCoroutine(GameObject _panel)
         {
-            while (_panel.GetComponent<RectTransform>().transform.position.y < 650f)
+            while (_panel.GetComponent<RectTransform>().transform.position.y < 700f)
             {
                 yield return new WaitForSecondsRealtime(Time.deltaTime);
                 //Debug.Log("Корутина открытия панели запущена ");

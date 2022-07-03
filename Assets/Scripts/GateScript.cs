@@ -24,33 +24,6 @@ namespace Zikkurat
         {
             controls = new PlayerControls();
         }
-        
-        //Оказывается, это событие клика не по воротам, а вообще.
-        /*
-        private void OnEnable()
-        {
-            controls.ActionMap.Enable();
-            controls.ActionMap.GateClick.performed += OnClick;
-        }
-
-        private void OnDisable()
-        {
-            controls.ActionMap.GateClick.performed -= OnClick;
-            controls.ActionMap.Disable();
-        }
-
-        private void OnClick(CallbackContext context)
-        {
-                if (ClickGateEvent != null)
-                {
-                    ClickGateEvent(this.gameObject.name);
-                }
-                else
-                {
-                    Debug.Log("ClickGateEvent = null");
-                }
-        }
-        */
 
         public void OnPointerClick(PointerEventData eventData)
         {
