@@ -22,15 +22,15 @@ namespace Zikkurat
         //Урон от сильной атаки
         private float _strongDamage = 6f;
         //Вероятность промаха
-        private float _missProbability = 0f;
+        private float _missProbability = 0.2f;
         //Вероятность двукратного урона
-        private float _critProbability = 0f;
+        private float _critProbability = 0.1f;
         //Вероятность сильной атаки
-        private float _strongAttackProbability = 0f;
+        private float _strongAttackProbability = 0.2f;
         #endregion
 
         //Корутина удара
-        Coroutine _fastAttack = null;
+        Coroutine _attack = null;
         //Корутина движения юнита
         Coroutine _movementUnit = null;
 
@@ -65,7 +65,7 @@ namespace Zikkurat
             float _distance = Vector3.Distance(this.transform.position, _destination);
             if (_distance < 2f)
             {
-                if (_fastAttack == null)
+                if (_attack == null)
                 {
                     this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
                     this.GetComponent<Rigidbody>().velocity = Vector3.zero;
@@ -73,9 +73,9 @@ namespace Zikkurat
                 if (_inBattle)
                 {
                     //Отнять жизни у врага?
-                    if (_fastAttack == null)
+                    if (_attack == null)
                     {
-                        _fastAttack = StartCoroutine(FastAttackCoroutine());
+                        _attack = StartCoroutine(AttackCoroutine());
                     }
                 }
             }
@@ -116,31 +116,101 @@ namespace Zikkurat
 
         public void WoundFast()
         {
-            Debug.Log(_health + "health");
-            Debug.Log(_fastDamage + "fastDamage");
-            _health -= _fastDamage;
-            Debug.Log("У " + this.gameObject.name + " осталось " + _health + " здоровья");
+            float _randomNumber = Random.Range(0f, 1f);
+            if (_randomNumber > _missProbability)
+            {
+                _randomNumber = Random.Range(0f, 1f);
+                if (_randomNumber < _critProbability)
+                {
+                    Debug.Log("Критический быстрый удар");
+                    _health -= _fastDamage * 2;
+                }
+                else
+                {
+                    Debug.Log("Быстрый удар");
+                    _health -= _fastDamage;
+                }
+            }
+            else
+            {
+                Debug.Log("Промах быстрого удара");
+                _health -= 0;
+            }
+            CheckHealth();
+        }
+
+        public void WoundStrong()
+        {
+            //Проверка на промах и критический удар
+            float _randomNumber = Random.Range(0f, 1f);
+            if (_randomNumber > _missProbability)
+            {
+                _randomNumber = Random.Range(0f, 1f);
+                if (_randomNumber < _critProbability)
+                {
+                    Debug.Log("Критический сильный удар");
+                    _health -= _strongDamage*2;
+                }
+                else 
+                {
+                    Debug.Log("Сильный удар");
+                    _health -= _strongDamage;
+                }
+            }
+            else
+            {
+                Debug.Log("Промах сильного удара");
+                _health -= 0;
+            }
+            CheckHealth();
+        }
+
+        private void CheckHealth()
+        {
             if (_health <= 0)
             {
-                StopCoroutine(FastAttackCoroutine());
+                StopCoroutine(AttackCoroutine());
                 this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Die");
             }
         }
 
-        private IEnumerator FastAttackCoroutine()
+        private IEnumerator AttackCoroutine()
         {
             while (_inBattle)
             {
                 yield return new WaitForSecondsRealtime(1f);
-                //Анмация удара
-                this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
-                _enemy.GetComponent<WarriorScript>().WoundFast();
+                //Выбор удара
+                if (AttackChoice())
+                {
+                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Strong");
+                    _enemy.GetComponent<WarriorScript>().WoundStrong();
+                }
+                else
+                {
+                    this.gameObject.GetComponent<UnitEnvironment>().StartAnimation("Fast");
+                    _enemy.GetComponent<WarriorScript>().WoundFast();
+                }
+                //Конец корутины атаки
                 if (_enemy == null)
                 {
                     this.gameObject.GetComponent<UnitEnvironment>().Moving(0f);
                     _inBattle = false;
                     yield break;
                 }
+            }
+        }
+
+        //Определение вероятности сильного удара
+        private bool AttackChoice()
+        {
+            float _randomNumber = Random.Range(0f, 1f);
+            if (_randomNumber > _strongAttackProbability)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 

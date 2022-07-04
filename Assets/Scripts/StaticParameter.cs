@@ -13,27 +13,27 @@ namespace Zikkurat
         public static float _speedGreen = 3f;
         public static float _fastDamageGreen=3f;
         public static float _strongDamageGreen=6f;
-        public static float _missProbabilityGreen=0f;
-        public static float _critProbabilityGreen=0f;
-        public static float _strongAttackProbabilityGreen=0f;
+        public static float _missProbabilityGreen=0.2f;
+        public static float _critProbabilityGreen=0.1f;
+        public static float _strongAttackProbabilityGreen=0.2f;
 
         //Для красных юнитов
         public static float _healthRed = 6f;
         public static float _speedRed = 3f;
         public static float _fastDamageRed=3f;
         public static float _strongDamageRed=6f;
-        public static float _missProbabilityRed=0f;
-        public static float _critProbabilityRed=0f;
-        public static float _strongAttackProbabilityRed=0f;
+        public static float _missProbabilityRed=0.2f;
+        public static float _critProbabilityRed=0.1f;
+        public static float _strongAttackProbabilityRed=0.2f;
 
         //Для синих юнитов
         public static float _healthBlue=6f;
         public static float _speedBlue=3f;
         public static float _fastDamageBlue=3f;
         public static float _strongDamageBlue=6f;
-        public static float _missProbabilityBlue=0f;
-        public static float _critProbabilityBlue=0f;
-        public static float _strongAttackProbabilityBlue=0f;
+        public static float _missProbabilityBlue=0.2f;
+        public static float _critProbabilityBlue=0.1f;
+        public static float _strongAttackProbabilityBlue=0.5f;
         #endregion
 
         #region "Блок слайдеров"
