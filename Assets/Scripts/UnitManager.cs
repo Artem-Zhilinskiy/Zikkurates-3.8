@@ -28,8 +28,8 @@ namespace Zikkurat
 
         //Задержки создания юнитов
         private int _greenRespawnDelay = 4;
-        private int _blueRespawnDelay = 5;
-        private int _redRespawnDelay = 6;
+        private int _blueRespawnDelay = 4;
+        private int _redRespawnDelay = 4;
 
         //Корутина создания юнитов
         Coroutine _greenFighterCreationCoroutine = null;
@@ -77,7 +77,7 @@ namespace Zikkurat
         {
             _greenFighterCreationCoroutine = StartCoroutine(GreenFighterCreation());
             _redFighterCreationCoroutine = StartCoroutine(RedFighterCreation());
-            //_blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
+            _blueFighterCreationCoroutine = StartCoroutine(BlueFighterCreation());
         }
 
         private IEnumerator GreenFighterCreation()

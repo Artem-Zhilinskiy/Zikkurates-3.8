@@ -63,7 +63,7 @@ namespace Zikkurat
             }
             this.gameObject.transform.LookAt(_destination);
             float _distance = Vector3.Distance(this.transform.position, _destination);
-            if (_distance < 2f)
+            if (_distance < 3f)
             {
                 if (_attack == null)
                 {
@@ -122,18 +122,18 @@ namespace Zikkurat
                 _randomNumber = Random.Range(0f, 1f);
                 if (_randomNumber < _critProbability)
                 {
-                    Debug.Log("Критический быстрый удар");
+                    //Debug.Log("Критический быстрый удар");
                     _health -= _fastDamage * 2;
                 }
                 else
                 {
-                    Debug.Log("Быстрый удар");
+                    //Debug.Log("Быстрый удар");
                     _health -= _fastDamage;
                 }
             }
             else
             {
-                Debug.Log("Промах быстрого удара");
+                //Debug.Log("Промах быстрого удара");
                 _health -= 0;
             }
             CheckHealth();
@@ -148,18 +148,18 @@ namespace Zikkurat
                 _randomNumber = Random.Range(0f, 1f);
                 if (_randomNumber < _critProbability)
                 {
-                    Debug.Log("Критический сильный удар");
+                    //Debug.Log("Критический сильный удар");
                     _health -= _strongDamage*2;
                 }
                 else 
                 {
-                    Debug.Log("Сильный удар");
+                    //Debug.Log("Сильный удар");
                     _health -= _strongDamage;
                 }
             }
             else
             {
-                Debug.Log("Промах сильного удара");
+                //Debug.Log("Промах сильного удара");
                 _health -= 0;
             }
             CheckHealth();
